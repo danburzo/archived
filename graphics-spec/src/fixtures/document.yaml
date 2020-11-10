@@ -1,0 +1,43 @@
+key: fx495fms
+type: document
+data:
+  title: Page 1
+  width: 1000
+  height: 1000
+nodes:
+    - 
+      key: xmks0doo
+      type: group
+      data: null
+      nodes:
+        - 
+          type: rect
+          data:
+            key: af494430
+            x: 0
+            y: 0
+            width: 100
+            height: 100
+            instance_name: Rectangle 1
+            locked: true
+            visible: true
+            style:
+              fill: #eee
+              stroke: #000
+          nodes: null
+        -
+          type: text
+          data:
+            key: f8f8xmks
+            x: 0
+            y: 0
+            width: 300
+            height: 100
+            text: Hello World
+            instance_name: Text 1
+            locked: false
+            visible: false
+            style:
+              width_policy: auto
+              height_policy: auto
+          nodes: null
