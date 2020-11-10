@@ -1,0 +1,12 @@
+{
+  "name": "textpenses",
+  "version": "0.1.0",
+  "description": "Text-based expense management",
+  "main": "textpenses.js",
+  "author": "Dan Burzo",
+  "license": "MIT",
+  "devDependencies": {
+    "fs-extra": "~0.11.1",
+    "cli-table": "~0.3.0"
+  }
+}
