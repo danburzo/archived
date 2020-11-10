@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "electron": ">=1.8.2-beta5",
+    "menubar": "^5.2.3",
+    "tone": "^0.10.0"
+  },
+  "bin": "index.js",
+  "name": "theremin",
+  "scripts": {
+  	"start": "yarn electron index.js"
+  }
+}

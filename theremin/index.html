@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Theremin</title>
+</head>
+<body>
+
+	<h1>Theremin</h1>
+
+	<script type="text/javascript">
+
+		var Tone = require('tone');
+		const { ipcRenderer } = require('electron');
+
+		class Theremin {
+			constructor() {
+				this.osc = new Tone.Oscillator({
+					"frequency" : 440,
+					"volume" : -10
+				}).toMaster();
+				ipcRenderer.on('change-pitch', (e, new_pitch) => 
+					this.changePitch(new_pitch)
+				);
+				ipcRenderer.on('change-volume', (e, new_volume) => 
+					this.changeVolume(new_volume)
+				);
+				ipcRenderer.on('start', (e) => this.start());
+				ipcRenderer.on('stop', (e) => this.stop());
+			}
+
+			start() {
+				this.osc.start();
+				Tone.Master.volume.rampTo(0, 0.05);
+			}
+
+			stop() {
+				Tone.Master.volume.rampTo(-Infinity, 0.05);
+			}
+
+			changePitch(pitch) {
+				this.osc.set('frequency', ~~pitch);
+			}
+
+			changeVolume(volume) {
+				this.osc.set('volume', ~~volume);
+			}
+		}
+
+		const theremin = new Theremin();
+		
+	</script>
+</body>
+</html>

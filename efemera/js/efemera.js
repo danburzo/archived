@@ -15,8 +15,8 @@ var Efemera = {
 
 	store: window.store,
 
-	youTubeAPIKey: "AIzaSyDDXIPTpDjtE6f7Hhn_KylMVBHBZ00M2pk",
-	soundCloudClientId: "f20a9e7a1a89e138628aa4b68682b040",
+	youTubeAPIKey: "REDACTED",
+	soundCloudClientId: "REDACTED",
 
 	YT_API_URL: 'https://www.googleapis.com/youtube/v3',
 
