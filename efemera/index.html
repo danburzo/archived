@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+	<title>Efemera</title>
+
+	<meta charset='utf-8'> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="shortcut icon" href="img/favicon.png"/>
+	<link rel="stylesheet" type="text/css" href="components/pure-built/pure-min.css"/>
+	<link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+
+	<!-- Facebook OpenGraph -->
+    <meta name='og:title' content='Efemera'>
+    <meta name='og:description' content='The online music player'>
+    <meta name='og:url' content='http://efemera.ro'>
+    <meta name='og:type' content='website'>
+    <meta name='og:image' content='https://efemera.ro/img/logo.png'>
+
+	<script type="text/javascript" src='components/jquery/jquery.min.js'></script>
+	<script type="text/javascript" src='components/handlebars/handlebars.js'></script>
+	<script type="text/javascript" src='components/jquery-knob/js/jquery.knob.js'></script>
+	<script type="text/javascript" src='components/store.js/store.min.js'></script>
+	<!--<script type="text/javascript" src='components/jquery-ui/ui/minified/jquery-ui.min.js'></script>-->
+	<script type="text/javascript" src="//connect.soundcloud.com/sdk.js"></script>
+	<script type="text/javascript" src="//youtube.com/iframe_api"></script>
+	<script type="text/javascript" src="js/efemera.js"></script>
+	<script type="text/javascript" src="js/efemera.nowplaying.js"></script>
+	<script type="text/javascript" src="js/efemera.song.js"></script>
+	<script type="text/javascript" src="js/efemera.playlist.js"></script>
+	<script type="text/javascript" src="js/efemera.playlistmanager.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+	<script type="text/javascript" src="//use.typekit.net/nvg5nyz.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+</head>
+<body>
+	<!-- YouTube iFrame container -->
+	<div id='ytplayer'></div>
+	
+	<div id='main'>
+		<header class='clearfix'>
+
+			<h1 id='logo'>Efemera</h1>
+			<div id='search'>
+				<input type='text' placeholder='Search for music on YouTube and SoundCloud'/>
+				<a href='#' class='submit btn'>Search</a>
+				<p>Try some: <span id='search-suggestions'></span> Press <strong>F1</strong> for help, <strong>F11</strong> for fullscreen.</p>
+			</div>
+		</header>
+
+<!-- 		<nav>
+			<ul>
+				<li class='selected'><a href='#'>Search results</a></li>
+				<li><a href='#'>Quicklist</a></li>
+				<li><a href='#'>Loved tracks</a></li>
+				<li><a href='#'>Your playlists</a></li>
+			</ul>
+			<div class='subnav'>
+				<strong>Show: </strong>
+				<a href='#'>All results</a> &middot;
+				<a href='#'>YouTube</a> &middot;
+				<a href='#'>SoundCloud<a>
+			</div>
+		</nav> -->
+
+
+		<div id='results' class='result-set no-select'></div>
+
+
+		<div id='help'>
+			<div>
+				<h2>Keyboard Shortcuts</h2>
+				<ul>
+					<li><span class='kb-short'>j</span> &mdash; previous song in queue;</li>
+					<li><span class='kb-short'>k</span> &mdash; next song in queue;</li>
+					<li><span class='kb-short'>Space</span> &mdash; play/pause current song;</li>
+					<li>
+						<span class='kb-short'>&uarr;</span> 
+						<span class='kb-short'>&darr;</span> 
+						<span class='kb-short'>&larr;</span> 
+						<span class='kb-short'>&rarr;</span> &mdash; move through search results;</li>
+					<li><span class='kb-short'>Enter</span> &mdash; play selected song.</li>
+
+				</ul>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div id='now-playing' class='hidden no-select'>
+
+		<div class='thumb' id='now-playing-thumb'>
+			<img src=""/>
+		</div>
+		<a href='#' target='_blank' id='now-playing-title'></a>
+		<div>
+			<div class='seek-info'>
+				<span id='now-playing-position'>0:00</span> / <span id='now-playing-duration'>0:00</span>
+			</div>
+			<div id='now-playing-seek-bar' class='seek-bar'>
+				<div id='now-playing-seek-cursor' class='seek-cursor'></div>
+			</div>
+		</div>
+		<a href='#' class='control prev'><i class='icon-backward'></i>&nbsp;</a>
+		<a href='#' class='control play'><i class='icon-play'></i><i class='icon-pause'></i></a>
+		<a href='#' class='control next'>&nbsp;<i class='icon-forward'></i></a>
+		<a href='#' class='control shuffle'><i class='icon-random'></i><i class='icon-long-arrow-right'></i></a>
+		<a href='#' class='control love'><i class='icon-heart'></i><i class='icon-heart-empty'></i></a>
+		<div id='volume-dial'>
+			<input type='text' class='dial' data-min="0" data-max="100" value='90' data-width='44' data-height='44' data-thickness=".1" title='Volume' />
+			<i class='icon-volume-up'></i>
+		</div>
+	</div>
+
+	<!-- templates -->
+
+	<script id="search-suggestions-tmpl" type='text/x-handlebars-template'>
+	{{#suggestions}}
+		<a href='#' class='suggestion'>{{.}}</a> &middot 
+	{{/suggestions}}
+	</script>
+
+	<script id='playlist-tmpl' type='text/x-handlebars-template'>
+		<h2>{{ title }}</h2>
+		<ul>
+		{{#songs}}
+			<li data-id='{{ id }}' data-type='{{ sourceType }}' class='result clearfix'>
+
+				<div class='playlist-item-controls'>
+					<a href='#' class='control play'><i class='icon-play'></i></a>
+					<a href='#' class='control quicklist'><i class='icon-plus'></i></a>
+					<a href='#' class='control love'><i class='icon-heart'></i><i class='icon-heart-empty'></i></a>
+				</div>
+
+				<div class='thumb'><img src="{{ thumb }}"/></div>
+				<h3>{{ title }}</h3>
+				<p>
+					{{#if durationStr }} 
+						({{ durationStr}}) 
+					{{/if}} 
+					by {{ author }}
+				</p>
+			</li>
+		{{/songs}}
+		</ul>
+	</script>
+
+	<script id='current-playlist-tmpl' type='text/x-handlebars-template'>
+		<h2>Your current playlist</h2>
+		<ul>
+		{{#songs}}
+			<li>{{ title }}</li>
+		{{/songs}}
+		</ul>
+	</script>
+</body>
+</html>
