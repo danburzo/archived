@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+	<% include include/head %>
+	<body>
+		<% include include/header %>
+		<article class='custom-article'>
+			<h1><%- article.metadata.title %></h1>
+			<%- article.content -%>
+		</article>
+
+		<% include include/footer %>
+	</body>
+</html>

@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+	<% include include/head %>
+	<body>
+		<% include include/header %>
+		<article>
+			<h1><%- article.metadata.title %></h1>
+			<%- article.content -%>
+
+			<p>Date: <time datetime='<%= article.metadata.datetime %>'><%= article.metadata.moment %></time></p>
+		</article>
+
+		<% include include/footer %>
+	</body>
+</html>

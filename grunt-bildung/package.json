@@ -1,0 +1,31 @@
+{
+  "name": "grunt-bildung",
+  "version": "0.0.11",
+  "description": "A static website generator to use with Grunt",
+  "main": "Gruntfile.js",
+  "author": "Dan Burzo <danburzo@gmail.com> (http://danburzo.ro/)",
+  "homepage": "https://github.com/danburzo/grunt-bildung",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danburzo/grunt-bildung.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danburzo/grunt-bildung/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "~1.0.0",
+    "fs-extra": "~0.12.0",
+    "js-yaml": "~3.2.2",
+    "marked": "~0.3.2",
+    "slug": "~0.8.0",
+    "moment": "~2.8.3",
+    "rss": "~1.0.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "devDependencies": {
+    "handlebars": "~2.0.0"
+  }
+}

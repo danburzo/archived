@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+	<% include include/head %>
+	<body>
+		<% include include/header %>
+		<h1>Articles</h1>
+		<ul>
+		<% articles.forEach(function(article) {%>
+			<li><a href='<%= article.metadata.permalink %>'><%- article.metadata.title %></a> on <%- article.metadata.moment %></li>
+		<%})%>
+		</ul>
+		<% include include/footer %>
+	</body>
+</html>
