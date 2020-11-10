@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Peek demo</title>
+		<style>
+			html, body {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+
+			body {
+				font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+				background: black;
+				padding: 0;
+				margin: 0;
+			}
+
+			.content {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				-webkit-transform: translate(-50%,-50%);
+				overflow: hidden;
+				border-radius:50% 50%;
+				width: 0px;
+				padding-bottom: 0px;
+				transition: all 0.2s;
+				-webkit-transition: all 0.2s;
+				background: white;
+			}
+
+			.content.show {
+				width: 80%;
+				padding-bottom: 80%;
+			}
+
+			.content-inner {
+				font-size: 4em;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				-webkit-transform: translate(-50%,-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<div class='content'>
+			<div class='content-inner'>
+				sorginte
+			</div>
+		</div>
+		<script>
+
+		//https://github.com/LinusU/deviceshake.js/blob/master/deviceshake.js
+			(function () {
+// Options
+var opts = {
+violence: 4.0, // single shake sensitivity
+hf: 0.2, // high-pass filter constant
+shakethreshold: 5, // number of single shakes required to fire a shake event
+debounce: 1000 // delay between shake events (in ms)
+};
+// Initialize internal variables
+var axa = 0, aya = 0, aza = 0;
+var shakeaccum = 0;
+var prevtime = new Date();
+var cooldown = false;
+// Listen for motion
+window.addEventListener('devicemotion', function (event) {
+if(cooldown) { return ; }
+// get acceleration values
+var acc = (function () {
+if(event.acceleration) { return event.acceleration; }
+var acc = event.accelerationIncludingGravity;
+// high pass-filter to remove gravity
+// http://iphonedevelopertips.com/user-interface/accelerometer-101.html
+axa = acc.x - ((acc.x * opts.hf) + (axa * (1.0 - opts.hf)));
+aya = acc.y - ((acc.y * opts.hf) + (aya * (1.0 - opts.hf)));
+aza = acc.z - ((acc.z * opts.hf) + (aza * (1.0 - opts.hf)));
+return { x: acc.x - 2 * axa, y: acc.y - 2 * aya, z: acc.z - 2 * aza };
+})();
+// detect single shake
+// http://discussions.apple.com/thread.jspa?messageID=8224655
+if(
+Math.abs(acc.x) > opts.violence * 1.5 ||
+Math.abs(acc.y) > opts.violence * 2 ||
+Math.abs(acc.z) > opts.violence * 3
+) {
+var curtime = new Date();
+var timedelta = curtime.getTime() - prevtime.getTime();
+if(timedelta >= opts.debounce) {
+shakeaccum = 0;
+}
+prevtime = curtime;
+shakeaccum += 1;
+if(shakeaccum >= opts.shakethreshold) {
+shakeaccum = 0;
+cooldown = true;
+window.dispatchEvent(new Event('deviceshake'));
+setTimeout(function () { cooldown = false; }, opts.debounce);
+}
+}
+}, false);
+})();</script>
+
+		<script>
+			var content = document.querySelector('.content');
+			var word = document.querySelector('.content-inner');
+
+			
+			function show(e) {
+				content.classList.add('show');
+				e.preventDefault();
+			};
+
+			function hide(e) {
+				content.classList.remove('show');
+				e.preventDefault();
+			};
+
+			document.addEventListener('mousedown', show);
+			document.addEventListener('touchstart', show);
+			document.addEventListener('mouseup', hide);
+			document.addEventListener('touchend', hide);
+
+			var words = ["antracit",
+"atroce",
+"calambur",
+"conotație",
+"consecvent",
+"considerent",
+"custodie",
+"destin",
+"desuet",
+"diletant",
+"divaga",
+"dogmă",
+"echivoc",
+"elocvent",
+"explicit",
+"fiasco",
+"fonetic",
+"incorigibil",
+"indolent",
+"interval",
+"jecmăni",
+"leit",
+"letopiseț",
+"năpastă",
+"osmoză",
+"parametru",
+"pesimism",
+"pocit",
+"polimat",
+"pricină",
+"redundant",
+"relicvă",
+"refracție",
+"sabotaj",
+"sacerdot",
+"sarcasm",
+"sincopă",
+"sinestezie",
+"sinteză",
+"sorginte",
+"teribil"];
+
+			function changeWord() {
+				word.textContent = words[Math.floor(Math.random() * words.length)];
+			};
+
+			window.addEventListener('deviceshake', function() {
+				changeWord();
+			}, false);
+		</script>
+	</body>
+</html>
