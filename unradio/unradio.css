@@ -1,0 +1,76 @@
+html {
+	-webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: 1em;
+}
+
+header, footer, article {
+	max-width: 40em;
+	padding: 1em;
+	margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+.unradio-header a {
+	text-decoration: none;
+}
+
+.unradio-app {
+	display: flex;
+	border: 1px solid #ccc;
+}
+
+.stream-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-right: 1px solid #ccc;
+	min-width: 15em;
+}
+
+.stream-list__item:not(:last-child) {
+	display: block;
+	border-bottom: 1px solid #ccc;
+}
+
+.stream-list__item-trigger {
+	text-decoration: none;
+	display: block;
+	padding: 1em;
+	background: #f0f0f0;
+}
+
+.stream-list__item--selected .stream-list__item-trigger {
+	background: blue;
+	color: #fff;
+}
+
+.stream-list__item-trigger:hover,
+.stream-list__item--selected .stream-list__item-trigger:hover {
+	background: #fff;
+	color: #333;
+}
+
+.stream-list__item-description {
+	margin: 0;
+}
+
+.stream-current {
+	padding: 1em;
+}
+
+.stream-current__title a {
+	text-decoration: none;
+}

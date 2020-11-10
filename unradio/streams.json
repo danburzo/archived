@@ -1,0 +1,42 @@
+[  
+	{ 
+		"title": "FIP",
+		"description": "Broadcasting from France.",
+		"url": "http://www.fipradio.fr/",
+		"streamurl": "http://audio.scdn.arkena.com/11016/fip-midfi128.mp3" 
+	},
+	{
+		"title": "Bartók Radio",
+		"description": "Broadcasting from Hungary.",
+		"url": "http://www.mediaklikk.hu/bartok/",
+		"streamurl": "http://mr-stream.mediaconnect.hu/4741/mr3.mp3"
+	},
+	{
+		"title": "KEXP",
+		"description": "Broadcasting from Seattle, WA.",
+		"url": "http://kexp.org",
+		"streamurl": "http://live-mp3-128.kexp.org:80/kexp128.mp3"
+	},
+	{
+		"title": "Radio Nova",
+		"description": "Broadcasting from France.",
+		"url": "http://www.novaplanet.com/radionova/",
+		"streamurl": "http://novazz.ice.infomaniak.ch/novazz-128.mp3"
+	},
+	{
+		"title": "WFMU",
+		"description": "WFMU’s programming ranges from flat-out uncategorizable strangeness to rock and roll, experimental music, 78 RPM Records, jazz, psychedelia, hip-hop, electronica, hand-cranked wax cylinders, punk rock, gospel, exotica, R&B, radio improvisation, cooking instructions, classic radio airchecks, found sound, dopey call-in shows, interviews with obscure radio personalities and notable science-world luminaries, spoken word collages, Andrew Lloyd Webber soundtracks in languages other than English as well as Country and western music.",
+		"url": "https://wfmu.org/",
+		"streamurl": "http://stream0.wfmu.org/freeform-128k",
+		"metadata": {
+			"url": "https://wfmu.org/wp-content/themes/wfmu-theme/library/php/includes/liveNow.php",
+			"parser": "json"
+		}
+	},
+	{
+		"title": "SomaFM: Suburbs of Goa",
+		"description": " Desi sounds and beyond. Music on Suburbs of Goa is the future of the Eastern world. You'll hear artists like: Karsh Kale, Cheb I Sabbah, Nitin Sawhney, Kaya Project, TJ Rehmi and Bombay Dub Orchestra.",
+		"url": "http://somafm.com/suburbsofgoa/",
+		"streamurl": "http://ice1.somafm.com/suburbsofgoa-128-mp3"
+	}
+]

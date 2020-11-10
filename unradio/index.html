@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title>Unradio</title>
+	<meta name="description" content="Unradio is a tiny web site that plays a selection of online radio stations.">
+	<link rel="stylesheet" type="text/css" href="unradio.css">
+</head>
+<body>
+
+	<header role='banner' class='unradio-header'>
+		<h1><a href='https://danburzo.github.io/unradio'>📻 Unradio</a></h1>
+	</header>
+
+	<article>
+		<div class='unradio-app' id='unradio'>
+			<ul class='stream-list'>
+				<li v-bind:class='["stream-list__item", iscurrent(stream) ? "stream-list__item--selected" : "" ]' v-for='stream in streams'>
+					<a class='stream-list__item-trigger' href="{{stream.url}}" v-on:click.prevent='switchto(stream)'>
+						<h3 class='stream-list__item-title'>{{stream.title}}</h3>
+					</a>
+				</li>
+			</ul>
+			<div class='stream-current'>
+
+				<h2 class='stream-current__title'>
+					{{ current_stream.title || "Pick a radio station" }}
+					<a v-if='current_stream.url' href='{{current_stream.url}}' target='_blank' title="Go to this station's website">⤴</a>
+				</h2>
+				<p class='stream-current__description'>{{ current_stream.description }}</p>
+
+				<div v-if='current_stream.streamurl'>
+					<button v-on:click='play' v-show='paused'>Play</button>
+					<button v-on:click='pause' v-show='!paused'>Pause</button>
+				</div>
+				<audio v-el:audio v-bind:src='current_stream.streamurl' v-bind:paused='paused' autoplay></audio>
+
+				<div class='stream-current__metadata' v-if='metadata'>
+					<h3>Currently playing</h3>
+					<p><em>{{metadata.song}}</em> by {{metadata.artist}}</p>
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<footer role='contentinfo'>
+		Unradio &middot; <a href='https://github.com/danburzo/unradio' target='_blank'>code on github</a> &middot; see also: <a href='http://www.publicradio.info/' target='_blank'>publicradio.info</a>
+	</footer>
+
+	<script type="text/javascript" src='lib/vue.js'></script>
+	<script type="text/javascript" src='lib/vue-resource.js'></script>
+	<script type="text/javascript" src='unradio.js'></script>
+</body>
+</html>
