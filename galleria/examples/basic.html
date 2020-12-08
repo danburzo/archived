@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Galleria: a hackable gallery plugin</title>
+
+	<link rel="stylesheet" type="text/css" href="../galleria.css"/>
+	<script type="text/javascript" src='../galleria.js'></script>
+
+	<style type="text/css">
+		#page {
+			max-width: 50em;
+			margin: 3em auto;
+			padding: 3em;
+			background: #f9f9f9;
+		}
+
+		.galleria__main--fullscreen {
+	
+			/* 
+				Position `fixed` and top/right/bottom/left = 0 
+				makes the container take up all the available screen space.
+			*/
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			
+			/* 
+				Setup a nice background
+			*/
+			background-color: #fff;
+
+			/* 
+				Resets the height and the bottom padding in
+				case they've been customized. 
+			*/
+			height: auto;
+			padding-bottom: 0;
+			
+			/* 
+				Make sure the full-page gallery is relatively
+				on top of other things (don't overdo the Z-index though)
+			*/
+			z-index: 100;
+		}
+	</style>
+</head>
+<body>
+
+	<div id='page'>
+		<div class='gallery'>
+			
+			<a href='#' data-galleria-role='nav-prev'>← Previous</a>
+			<a href='#' data-galleria-role='nav-next'>Next →</a>
+
+			<div data-galleria-role='viewport'>
+				<div data-galleria-role='slider'>
+					<figure data-galleria-role='item'>
+						<img src="sample-images/1.jpg">
+					</figure>
+					<figure data-galleria-role='item'>
+						<img src="sample-images/2.jpg">
+					</figure>
+					<figure data-galleria-role='item'>
+						<img src="sample-images/3.jpg">
+					</figure>
+					<figure data-galleria-role='item'>
+						<img src="sample-images/4.jpg">
+					</figure>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var gallery = new Galleria(document.querySelector('.gallery'));
+		gallery.viewport_el.addEventListener('click', function(e) {
+			gallery.el.classList.toggle('galleria__main--fullscreen');
+		});
+	</script>
+</body>
+</html>
