@@ -1,0 +1,19 @@
+(function (document) {
+    var container = document.querySelector('<%- container %>');
+
+    if (container) {
+    <% if (mode === 'replace') { %>
+        container.innerHTML = <%- content %>;
+
+    <% } else if (mode === 'append') { %>
+        container.insertAdjacentHTML('beforeend', <%- content %>);
+
+    <% } else if (mode === 'prepend') { %>
+        container.insertAdjacentHTML('afterbegin', <%- content %>);
+    <% }%>
+
+    } else {
+        throw new Error('svginjector: Could not find element: <%- container %>');
+    }
+
+})(document);
