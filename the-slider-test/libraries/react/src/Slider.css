@@ -1,0 +1,15 @@
+.uix-slider {
+	height: 1em;
+	border: 1px solid #000;
+	position: relative;
+}
+
+.uix-slider__handle {
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	height: 1em;
+	width: 1em;
+	border-radius: 50%;
+	background: #ccc;
+}

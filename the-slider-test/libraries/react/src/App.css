@@ -1,0 +1,7 @@
+.demo {
+	display: flex;
+}
+
+.demo .uix-slider {
+	flex-grow: 1;
+}
